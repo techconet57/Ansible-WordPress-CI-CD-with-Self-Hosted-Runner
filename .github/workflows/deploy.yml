@@ -1,0 +1,30 @@
+name: Deploy WordPress
+
+on:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch:
+
+jobs:
+
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check Ansible version
+        run: ansible --version
+
+      - name: Test connection to WordPress server
+        run: ansible wordpress -m ping -i ansible/inventory
+
+      - name: Validate Ansible playbook
+        run: ansible-playbook ansible/wordpress.yml --syntax-check
+
+      - name: Deploy WordPress
+        run: ansible-playbook ansible/wordpress.yml

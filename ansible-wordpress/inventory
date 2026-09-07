@@ -1,0 +1,2 @@
+[wordpress]
+sam-wordpress ansible_host=10.0.6.250
