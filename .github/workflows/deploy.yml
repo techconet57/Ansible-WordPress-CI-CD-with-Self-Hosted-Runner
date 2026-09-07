@@ -24,7 +24,7 @@ jobs:
         run: ansible wordpress -m ping -i ansible/inventory
 
       - name: Validate Ansible playbook
-        run: ansible-playbook ansible/wordpress.yml --syntax-check
+        run: ansible-playbook ansible-wordpress/wordpress.yml --syntax-check
 
       - name: Deploy WordPress
-        run: ansible-playbook ansible/wordpress.yml
+        run: ansible-playbook ansible-wordpress/wordpress.yml
