@@ -1,14 +1,11 @@
-name: Deploy WordPress
+name: WordPress CI/CD
 
 on:
   push:
     branches:
       - main
 
-  workflow_dispatch:
-
 jobs:
-
   deploy:
     runs-on: self-hosted
 
@@ -18,13 +15,24 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Check Ansible version
-        run: ansible --version
+        run: |
+          ansible --version
 
       - name: Test connection to WordPress server
-        run: ansible wordpress -m ping -i ansible/inventory
+        run: |
+          ansible wordpress \
+            -i ansible-wordpress/inventory \
+            -m ping
 
       - name: Validate Ansible playbook
-        run: ansible-playbook ansible-wordpress/wordpress.yml --syntax-check
+        run: |
+          ansible-playbook \
+            -i ansible-wordpress/inventory \
+            ansible-wordpress/wordpress.yml \
+            --syntax-check
 
       - name: Deploy WordPress
-        run: ansible-playbook ansible-wordpress/wordpress.yml
+        run: |
+          ansible-playbook \
+            -i ansible-wordpress/inventory \
+            ansible-wordpress/wordpress.yml
