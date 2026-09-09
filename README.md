@@ -127,4 +127,4 @@ This project provides hands-on experience with important DevOps concepts includi
 
 ---
 
-⭐ If you find this project useful, consider giving the repository a star.
+⭐ If you find this project useful, consider giving the repository a star..
